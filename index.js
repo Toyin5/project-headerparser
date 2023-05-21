@@ -25,8 +25,9 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/whoami", function (req, res) {
+  const ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
   res.status(200).json({
-    ipaddress: req.headers.host,
+    ipaddress: ip,
     language: req.headers["accept-language"],
     software: req.headers["user-agent"],
   });
